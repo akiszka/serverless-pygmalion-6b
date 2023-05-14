@@ -37,7 +37,9 @@ def inference(model_inputs:dict) -> dict:
     input_tokens = tokenizer.encode(prompt, return_tensors="pt").to(device)
 
     # Run the model
-    output = model.generate(input_tokens, max_new_tokens=25)
+    max_new_tokens = model_inputs.get('max_new_tokens', 196)
+    repetition_penalty = model_inputs.get('repetition_penalty', 1.17)
+    output = model.generate(input_tokens, max_new_tokens=max_new_tokens, repetition_penalty=repetition_penalty)
 
     # Decode output tokens
     output_text = tokenizer.batch_decode(output, skip_special_tokens = True)[0]
