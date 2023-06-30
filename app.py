@@ -3,7 +3,7 @@ import torch
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-# Init is ran on server startup
+# Ini t is ran on server startup
 # Load your model to GPU as a global variable here.
 def init():
     global model
